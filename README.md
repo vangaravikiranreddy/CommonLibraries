@@ -20,6 +20,15 @@ CommonLibraries serves as the foundation layer for all our microservices, ensuri
 
 **Usage**: Import and configure with service-specific settings for consistent API communication patterns.
 
+### Database Library
+**Purpose**: Unified database access layer providing consistent data operations across all services.
+
+**Features**:
+- Connection pooling and management
+- Query builder and ORM functionality
+
+**Usage**: Provides standardized methods for CRUD operations, complex queries, and database schema management.
+
 ## Configuration
 
 Each library requires configuration specific to your service needs. See the individual library documentation for detailed configuration options.
