@@ -29,6 +29,15 @@ CommonLibraries serves as the foundation layer for all our microservices, ensuri
 
 **Usage**: Provides standardized methods for CRUD operations, complex queries, and database schema management.
 
+### Security Library
+**Purpose**: Centralized security components for authentication, authorization, and data protection.
+
+**Features**:
+- JWT token generation and validation
+- Role-based access control (RBAC)
+
+**Usage**: Provides consistent security implementations across all services and endpoints.
+
 ## Configuration
 
 Each library requires configuration specific to your service needs. See the individual library documentation for detailed configuration options.
