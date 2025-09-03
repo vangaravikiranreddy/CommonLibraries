@@ -1,12 +1,16 @@
 package com.security.security_library.filter;
 
 import com.security.security_library.token.JwtAuthenticationToken;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+
+import java.io.IOException;
 
 public class CustomAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     public CustomAuthenticationFilter(String defaultFilterProcessesUrl) {
@@ -22,5 +26,9 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
             return super.getAuthenticationManager().authenticate(new JwtAuthenticationToken(token, null));
         }
         throw new BadCredentialsException("Missing or invalid Authorization header");
+    }
+
+    public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        chain.doFilter(request, response);
     }
 }

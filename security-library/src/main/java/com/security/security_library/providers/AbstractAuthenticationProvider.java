@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 public class AbstractAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String token = (String) authentication.getPrincipal();
+        String token = String.valueOf(authentication.getPrincipal());
 
         try {
             return parseAndValidateToken(token);
@@ -22,7 +22,7 @@ public class AbstractAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return true;
     }
 
     protected Authentication parseAndValidateToken(String token) {

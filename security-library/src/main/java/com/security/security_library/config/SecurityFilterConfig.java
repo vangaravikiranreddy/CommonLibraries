@@ -20,7 +20,7 @@ public class SecurityFilterConfig {
 
     @Bean
     public CustomAuthenticationFilter customAuthenticationFilter() {
-        CustomAuthenticationFilter filter = new CustomAuthenticationFilter("/api/auth/login");
+        CustomAuthenticationFilter filter = new CustomAuthenticationFilter("/**");
         filter.setAuthenticationManager(authenticationManager);
         return filter;
     }
@@ -31,7 +31,7 @@ public class SecurityFilterConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();

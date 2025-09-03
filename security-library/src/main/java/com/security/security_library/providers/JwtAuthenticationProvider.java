@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -27,13 +26,12 @@ public class JwtAuthenticationProvider extends AbstractAuthenticationProvider {
 
     public Authentication parseAndValidateToken(String token) {
         try {
-            JwtParserBuilder parserBuilder = Jwts.parser()
-                    .setSigningKey(key);
+            JwtParser parser = Jwts.parser()
+                    .setSigningKey(key)
+                    .build();
 
-            JwtParser parser = parserBuilder.build();
-
-            Jws<Claims> jws = parser.parseClaimsJws(token);
-            Claims claims = jws.getBody();
+            Claims claims = parser.parseClaimsJws(token)
+                    .getBody();
 
             validateTokenClaims(claims);
             return getAuthentication(claims, token);
